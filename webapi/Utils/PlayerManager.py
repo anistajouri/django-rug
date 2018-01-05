@@ -29,7 +29,7 @@ class PlayerManager(object):
             p = subprocess.Popen(mplayer_command, shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             p.communicate()
             # the following line will only be printed when the process mplayer will be killed
-            print "Mplayer stopped"
+            print("Mplayer stopped")
         else:
             fnull = open(os.devnull, 'w')
             subprocess.Popen(mplayer_command, stdout=fnull, stderr=fnull)
@@ -66,24 +66,24 @@ class ThreadTimeout(object):
 
     def run(self):
         def play_webradio_thread():
-            print 'Starting the web radio player thread'
+            print('Starting the web radio player thread')
             self.callback_instance.start()
 
         def check_webradio_is_running_thread():
-            print "Wait %s seconds before checking if the thread is alive" % self.timeout
+            print("Wait %s seconds before checking if the thread is alive" % self.timeout)
             sleep(self.timeout)
             if self.main_thread.is_alive():
-                print 'Thread is alive'
+                print('Thread is alive')
             else:
-                print 'Thread is dead'
+                print('Thread is dead')
                 if self.backup_instance is not None:
-                    print "Playing backup file"
+                    print("Playing backup file")
                     self.backup_instance.start()
                 else:
-                    print "Not backup file provided"
+                    print("Not backup file provided")
 
         def auto_kill_thread():
-            print "Auto kill thread started, will stop the web radio in %s minutes" % self.time_before_auto_kill
+            print("Auto kill thread started, will stop the web radio in %s minutes" % self.time_before_auto_kill)
             sleep(self.time_before_auto_kill*60)
             PlayerManager.stop()
 

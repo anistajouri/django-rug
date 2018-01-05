@@ -1,2 +1,2 @@
 b''
-37 16 * * 2,3,4,5 python G:\tapis\RugBack\djangorug\run_web_radio.py 1 # piclodio1
+37 16 * * 2,3,4,5 python /home/anis/tapis/django-rug/run_web_radio.py 1 # piclodio1

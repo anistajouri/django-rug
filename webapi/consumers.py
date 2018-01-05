@@ -28,6 +28,7 @@ def ws_message(message):
    # message.reply_channel.send({'text':'200'})
 
 def ws_connect(message):
+    print("ws_connect:Someone connected.")
     Group('stocks').add(message.reply_channel)
     Group('stocks').send({'text':'connected'})
 
