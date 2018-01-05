@@ -1,0 +1,7 @@
+django==1.11.8
+django-cors-headers 
+djangorestframework==3.7.3
+gunicorn
+channels
+asgi_redis
+pyalsaaudio
