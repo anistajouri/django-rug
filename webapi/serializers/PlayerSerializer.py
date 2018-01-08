@@ -1,12 +1,12 @@
 from rest_framework import serializers
 
-from webapi.models import WebRadio
+from webapi.models import MP3Playback
 
 
 class PlayerManagerSerializer(serializers.Serializer):
     status = serializers.CharField()
-    webradio = serializers.PrimaryKeyRelatedField(required=False,
-                                                  queryset=WebRadio.objects.all(),
+    mp3playback = serializers.PrimaryKeyRelatedField(required=False,
+                                                  queryset=MP3Playback.objects.all(),
                                                   allow_empty=True)
 
     def update(self, instance, validated_data):

@@ -3,7 +3,7 @@ import re
 
 import logging
 
-logger = logging.getLogger("piclodio")
+logger = logging.getLogger("alertrug")
 logger.setLevel(logging.DEBUG)
 ch = logging.StreamHandler()
 # add the handlers to logger
@@ -16,7 +16,7 @@ class CrontabManager(object):
     Allow to create, remove, disable an enable a Linux crontab line
     """
 
-    COMMENT = "piclodio"
+    COMMENT = "alertrug"
     TMP_FILE = "new_newcron.txt"
 
     @classmethod
@@ -36,7 +36,7 @@ class CrontabManager(object):
     def add_job(cls, job):
         """
         Add a new job to the crontab
-        :param job: a cron line. E.g: 0 7 * * * echo test # piclodio 1
+        :param job: a cron line. E.g: 0 7 * * * echo test # alertrug 1
         :return:
         """
         # get the current crontab

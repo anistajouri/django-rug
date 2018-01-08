@@ -65,11 +65,11 @@ class ThreadTimeout(object):
             self.time_before_auto_kill = None
 
     def run(self):
-        def play_webradio_thread():
-            print('Starting the web radio player thread')
+        def play_mp3_thread():
+            print('Starting the mp3 player thread')
             self.callback_instance.start()
 
-        def check_webradio_is_running_thread():
+        def check_mp3_is_running_thread():
             print("Wait %s seconds before checking if the thread is alive" % self.timeout)
             sleep(self.timeout)
             if self.main_thread.is_alive():
@@ -83,16 +83,17 @@ class ThreadTimeout(object):
                     print("Not backup file provided")
 
         def auto_kill_thread():
-            print("Auto kill thread started, will stop the web radio in %s minutes" % self.time_before_auto_kill)
-            sleep(self.time_before_auto_kill*60)
+            print("Auto kill thread started, will stop the mp3 playback in %s seconds" % self.time_before_auto_kill)
+#            sleep(self.time_before_auto_kill*60)
+            sleep(self.time_before_auto_kill)
             PlayerManager.stop()
 
-        # start a thread to play the web radio
-        self.main_thread = threading.Thread(target=play_webradio_thread)
+        # start a thread to play the mp3
+        self.main_thread = threading.Thread(target=play_mp3_thread)
         self.main_thread.start()
 
         # start a thread that will check that the first thread is alive
-        thread_waiting = threading.Thread(target=check_webradio_is_running_thread)
+        thread_waiting = threading.Thread(target=check_mp3_is_running_thread)
         thread_waiting.start()
 
         # start a thread for auto kill

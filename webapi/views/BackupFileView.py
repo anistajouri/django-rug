@@ -23,9 +23,9 @@ class BackupFileView(APIView):
         if serializer.is_valid():
             # delete the existing MP3 file if exist
             backup_files = BackupMusic.objects.all()
-            for el in backup_files:
-                os.remove(el.backup_file.path)
-                el.delete()
+            # for el in backup_files:
+            #     os.remove(el.backup_file.path)
+            #     el.delete()
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

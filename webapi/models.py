@@ -2,17 +2,14 @@ from __future__ import unicode_literals
 
 from django.db import models
 
-
-class WebRadio(models.Model):
+class MP3Playback(models.Model):	
     name = models.CharField(max_length=250)
-    url = models.CharField(max_length=250)
-    # a default WebRadio is the web radio the user can launch when click on play.
-    # The last started web radio become the default one
+    mp3_path = models.CharField(max_length=250)
+    # The last started song become the default one
     is_default = models.BooleanField(default=False)
 
     def __str__(self):
-        return "[WebRadio] name: %s, url: %s, is_default: %s" % (self.name, self.url, self.is_default)
-
+        return "[MP3Playback] name: %s, url: %s, is_default: %s" % (self.name, self.url, self.is_default)
 
 class AlarmClock(models.Model):
     name = models.CharField(max_length=250)
@@ -26,9 +23,28 @@ class AlarmClock(models.Model):
     hour = models.IntegerField()
     minute = models.IntegerField()
     is_active = models.BooleanField(default=False)
-    auto_stop_minutes = models.IntegerField(default=0)
-    webradio = models.ForeignKey(WebRadio)
+    auto_stop_seconds = models.IntegerField(default=0)
+    stop_seconds_hit_rug = models.IntegerField(default=0)
+    mp3_playback = models.ForeignKey(MP3Playback)
 
+
+class AlertRug(models.Model):
+    name = models.CharField(max_length=250)
+    is_active_first_pass = models.BooleanField(default=False)
+    is_active_second_pass = models.BooleanField(default=False)
+    is_playback_active = models.BooleanField(default=False)
+    alert_duration_Seconds = models.IntegerField()
+    auto_stop_seconds = models.IntegerField(default=0)
+    stop_seconds_hit_rug = models.IntegerField(default=0)
+    alarm_clock = models.ForeignKey(AlarmClock)
+    mp3_playback = models.ForeignKey(MP3Playback)
+
+
+
+class AlertNotified(models.Model):
+    date_pressed = models.CharField(max_length=250)
+    duration_Seconds = models.IntegerField()
+    alert_rug = models.ForeignKey(AlertRug)
 
 
 class BackupMusic(models.Model):

@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from webapi.models import AlarmClock, WebRadio
+from webapi.models import AlarmClock, MP3Playback
 
 
 class AlarmClockSerializer(serializers.ModelSerializer):
@@ -15,10 +15,11 @@ class AlarmClockSerializer(serializers.ModelSerializer):
     hour = serializers.IntegerField(min_value=0, max_value=23)
     minute = serializers.IntegerField(min_value=0, max_value=59)
     is_active = serializers.BooleanField(default=False)
-    auto_stop_minutes = serializers.IntegerField(min_value=0, max_value=200, default=0)
-    webradio = serializers.PrimaryKeyRelatedField(queryset=WebRadio.objects.all())
+    auto_stop_seconds = serializers.IntegerField(min_value=0, max_value=200, default=0)
+    stop_seconds_hit_rug = serializers.IntegerField(min_value=0, max_value=200, default=0)
+    mp3_playback = serializers.PrimaryKeyRelatedField(queryset=MP3Playback.objects.all())
 
     class Meta:
         model = AlarmClock
         fields = ('id', 'name', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday', 'hour',
-                  'minute', 'auto_stop_minutes', 'is_active', 'webradio')
+                  'minute', 'auto_stop_seconds', 'stop_seconds_hit_rug', 'is_active', 'mp3_playback')

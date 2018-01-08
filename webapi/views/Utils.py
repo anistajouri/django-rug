@@ -13,20 +13,20 @@ def add_job_in_crontab(alarm):
     day_of_week = _get_day_of_week(alarm)
     current_script_path = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 
-    run_script_path = get_root_path(current_script_path) + os.sep + "run_web_radio.py"
+    run_script_path = get_root_path(current_script_path) + os.sep + "run_mp3_playback.py"
 
-    # new_job: <minute> <hour> * * <day_of_week> <run_script_path> <webradio_id>
+    # new_job: <minute> <hour> * * <day_of_week> <run_script_path> <mp3playback_id>
     new_job = "%s %s * * %s python %s %s " % (alarm.minute,
                                               alarm.hour,
                                               day_of_week,
                                               run_script_path,
-                                              alarm.webradio.id)
-    if alarm.auto_stop_minutes is not 0:
-        # new_job: <minute> <hour> * * <day_of_week> <run_script_path> <alarm_id> <auto_stop_minute>
-        new_job += "%s " % alarm.auto_stop_minutes
+                                              alarm.mp3_playback.id)
+    if alarm.auto_stop_seconds is not 0:
+        # new_job: <minute> <hour> * * <day_of_week> <run_script_path> <alarm_id> <auto_stop_seconds>
+        new_job += "%s " % alarm.auto_stop_seconds
 
-    # new_job: <minute> <hour> * * <day_of_week> <run_script_path> <alarm_id> [<auto_stop_minute>] # piclodio<alarm_id>
-    new_job += "# piclodio%s" % alarm.id
+    # new_job: <minute> <hour> * * <day_of_week> <run_script_path> <alarm_id> [<auto_stop_minute>] # alertrug<alarm_id>
+    new_job += "# alertrug%s" % alarm.id
 
     if not alarm.is_active:
         line = "# "

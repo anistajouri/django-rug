@@ -20,7 +20,7 @@ from rest_framework import routers
 from webapi.views import BackupFileView
 from webapi.views import PlayerView
 from webapi.views import SoundView
-from webapi.views import WebRadioView
+from webapi.views import MP3PlaybackView
 from webapi.views import AlarmClockView
 from webapi.views import SystemDateView
 
@@ -33,8 +33,8 @@ urlpatterns = [
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
     # piclodio URLs
-    url(r'^webradio/?$', WebRadioView.WebRadioList.as_view()),
-    url(r'^webradio/(?P<pk>[0-9]+)/?$', WebRadioView.WebRadioDetail.as_view()),
+    url(r'^mp3playback/?$', MP3PlaybackView.MP3PlaybackList.as_view()),
+    url(r'^mp3playback/(?P<pk>[0-9]+)/?$', MP3PlaybackView.MP3PlaybackDetail.as_view()),
 
     url(r'^alarms/$', AlarmClockView.AlarmClockList.as_view()),
     url(r'^alarms/(?P<pk>[0-9]+)/?$', AlarmClockView.AlarmClockDetail.as_view()),
