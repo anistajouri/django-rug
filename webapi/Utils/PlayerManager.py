@@ -103,8 +103,8 @@ class ThreadTimeout(object):
 
 
 class CallbackPlayer(object):
-    def __init__(self, url=None):
-        self.url = url
+    def __init__(self, mp3_path=None):
+        self.mp3_path = mp3_path
 
     def start(self):
-        PlayerManager.play(self.url, blocking_thread=True)
+        PlayerManager.play(self.mp3_path, blocking_thread=True)

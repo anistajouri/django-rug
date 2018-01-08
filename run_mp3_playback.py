@@ -10,7 +10,7 @@ import os
 import sys
 import requests
 import django
-from mp3api.Utils.PlayerManager import CallbackPlayer, ThreadTimeout, PlayerManager
+from webapi.Utils.PlayerManager import CallbackPlayer, ThreadTimeout, PlayerManager
 
 def is_mp3_path_valid(mp3_path):
     """
@@ -37,7 +37,7 @@ project_path = os.path.dirname(os.path.realpath(__file__))
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "djangorug.settings")
 sys.path.append(project_path)
 django.setup()
-from mp3api.models import MP3Playback, BackupMusic
+from webapi.models import MP3Playback, BackupMusic
 
 # get the ID of the mp3playback to play from the argument
 id_mp3_playback_to_play = sys.argv[1]
@@ -66,15 +66,18 @@ backup_mp3_path = None
 backup_mp3_callback = None
 if backup_mp3_list is not None:
     if len(backup_mp3_list) == 1:
-        backup_mp3_path = backup_mp3_list[0].backup_file.mp3_path
+        backup_mp3_path = backup_mp3_list[0].backup_file.url
         print("Path to the backup MP3: %s" % backup_mp3_path)
         if backup_mp3_path is not None:
             backup_mp3_path = current_script_path + os.sep + backup_mp3_path
             backup_mp3_callback = CallbackPlayer(mp3_path=backup_mp3_path)
 
+
+
 # test the URL, if this one is not valid, we start the backup
 if is_mp3_path_valid(mp3_path=mp3_playback_to_play.mp3_path):
-    # start the thread that will play the mp3 playback, check that the mp3 playback is playing, and auto kill it if needed
+    print("valid mp3")
+    # start the thread that will play the mp3 playback, check that the mp3 playback is playing, and auto kill it if needed  
     mp3_playback_callback = CallbackPlayer(mp3_path=mp3_playback_to_play.mp3_path)
     # the following thread will start to play the mp3 playback and then check if the player is still alive after 35 seconds
     # this to prevent the case where the URL is valid and is answering request but no stream is present inside

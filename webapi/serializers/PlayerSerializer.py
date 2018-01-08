@@ -5,7 +5,7 @@ from webapi.models import MP3Playback
 
 class PlayerManagerSerializer(serializers.Serializer):
     status = serializers.CharField()
-    mp3playback = serializers.PrimaryKeyRelatedField(required=False,
+    mp3_playback = serializers.PrimaryKeyRelatedField(required=False,
                                                   queryset=MP3Playback.objects.all(),
                                                   allow_empty=True)
 

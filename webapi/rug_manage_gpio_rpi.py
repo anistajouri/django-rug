@@ -5,8 +5,8 @@ import threading
 import random
 from webapi.models import MP3Playback, AlarmClock
 
-#import RPi.GPIO as GPIO # Allows us to call our GPIO pins and names it just GPIO
-#from webapi.Utils.PlayerManager import PlayerManager
+import RPi.GPIO as GPIO # Allows us to call our GPIO pins and names it just GPIO
+from webapi.Utils.PlayerManager import PlayerManager
  
 
 
@@ -24,30 +24,29 @@ n = 0
 def periodic():
     global t;
     global n;
-    #n = random.randint(100,200);
-    n = n + 1
-    sendmsg(str(n))
+#    n = random.randint(100,200);
+#    sendmsg(str(n))
 
     #stop playing if reached
 #    if ((PlayerManager.is_started()) and (n > AlarmClock.stop_seconds_hit_rug)): 
 #      PlayerManager.stop()
 
-   #  GPIO.setmode(GPIO.BOARD)  # Set's GPIO pins to BCM GPIO numbering
-   #  # to bu used : Ground 06 / GPIO012
-   #  INPUT_PIN = 12           
-   #  # Sets our input pin, in this example I'm connecting our button to pin 12. Pin 0 is the SDA pin so I avoid using it for sensors/buttons
-   #  GPIO.setup(INPUT_PIN, GPIO.IN)  # Set our input pin to be an input
+    GPIO.setmode(GPIO.BOARD)  # Set's GPIO pins to BCM GPIO numbering
+    # to bu used : Ground 06 / GPIO012
+    INPUT_PIN = 12           
+    # Sets our input pin, in this example I'm connecting our button to pin 12. Pin 0 is the SDA pin so I avoid using it for sensors/buttons
+    GPIO.setup(INPUT_PIN, GPIO.IN)  # Set our input pin to be an input
 
-   #  # Create a function to run when the input is high
+    # Create a function to run when the input is high
 
-   # # GPIO.add_event_detect(INPUT_PIN, GPIO.FALLING, callback=inputLow, bouncetime=200) # Wait for the input to go low, run the function when it does
+   # GPIO.add_event_detect(INPUT_PIN, GPIO.FALLING, callback=inputLow, bouncetime=200) # Wait for the input to go low, run the function when it does
 
-   #  if (GPIO.input(INPUT_PIN) == True): # Physically read the pin now
-   #      sendmsg(str(n))
-   #      n = n + 1
-   #  else:
-   #      n = 0
-   #      sendmsg(str(n))
+    if (GPIO.input(INPUT_PIN) == True): # Physically read the pin now
+        sendmsg(str(n))
+        n = n + 1
+    else:
+        n = 0
+        sendmsg(str(n))
 
     #sleep(1);           # Sleep for a full second before restarting our loop
 
