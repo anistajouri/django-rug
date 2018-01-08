@@ -1,5 +1,5 @@
 from channels.routing import route
-from webapi.consumers import ws_connect, ws_disconnect, ws_message
+from webapi.rug_manage_gpio import ws_connect, ws_disconnect, ws_message
 
 
 channel_routing = [
