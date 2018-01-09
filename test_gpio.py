@@ -1,8 +1,9 @@
 import RPi.GPIO as GPIO # Allows us to call our GPIO pins and names it just GPIO
+import time
 
 GPIO.setmode(GPIO.BOARD)  # Set's GPIO pins to BCM GPIO numbering
 # to bu used : Ground 06 / GPIO012
-INPUT_PIN = 12           
+INPUT_PIN = 32
 # Sets our input pin, in this example I'm connecting our button to pin 12. Pin 0 is the SDA pin so I avoid using it for sensors/buttons
 GPIO.setup(INPUT_PIN, GPIO.IN)  # Set our input pin to be an input
 
@@ -12,8 +13,9 @@ GPIO.setup(INPUT_PIN, GPIO.IN)  # Set our input pin to be an input
 n=0
 while (1):
     if (GPIO.input(INPUT_PIN) == True): # Physically read the pin now
-        n = n + 1
-    else:
         n = 0
+    else:
+        n = n + 1
+    time.sleep(0.5)
     print(n)
 
