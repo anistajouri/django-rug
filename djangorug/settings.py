@@ -25,7 +25,7 @@ SECRET_KEY = 'on_n__dsemp!1(!*31_%$4az=gc*=^j2fji6ru1w1^p*x%2tgj'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.43.27']
+ALLOWED_HOSTS = ['192.168.43.27', 'localhost']
 
 
 # Application definition
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'import_export',    
     'webapi',
     'channels',    
     'corsheaders'

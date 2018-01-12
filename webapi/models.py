@@ -9,7 +9,7 @@ class MP3Playback(models.Model):
     is_default = models.BooleanField(default=False)
 
     def __str__(self):
-        return "[MP3Playback] name: %s, url: %s, is_default: %s" % (self.name, self.url, self.is_default)
+        return "[MP3Playback] name: %s, mp3 path: %s, is_default: %s" % (self.name, self.mp3_path, self.is_default)
 
 class AlarmClock(models.Model):
     name = models.CharField(max_length=250)
@@ -29,14 +29,12 @@ class AlarmClock(models.Model):
 
 
 class AlertRug(models.Model):
-    name = models.CharField(max_length=250)
     is_active_first_pass = models.BooleanField(default=False)
     is_active_second_pass = models.BooleanField(default=False)
     is_playback_active = models.BooleanField(default=False)
     alert_duration_Seconds = models.IntegerField()
     auto_stop_seconds = models.IntegerField(default=0)
     stop_seconds_hit_rug = models.IntegerField(default=0)
-    alarm_clock = models.ForeignKey(AlarmClock)
     mp3_playback = models.ForeignKey(MP3Playback)
 
 
@@ -44,7 +42,6 @@ class AlertRug(models.Model):
 class AlertNotified(models.Model):
     date_pressed = models.CharField(max_length=250)
     duration_Seconds = models.IntegerField()
-    alert_rug = models.ForeignKey(AlertRug)
 
 
 class BackupMusic(models.Model):

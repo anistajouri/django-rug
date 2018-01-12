@@ -32,7 +32,7 @@ urlpatterns = [
     # used by Django rest framework for dev
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
-    # piclodio URLs
+    # Rug URLs
     url(r'^mp3playback/?$', MP3PlaybackView.MP3PlaybackList.as_view()),
     url(r'^mp3playback/(?P<pk>[0-9]+)/?$', MP3PlaybackView.MP3PlaybackDetail.as_view()),
 

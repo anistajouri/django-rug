@@ -1,2 +1,2 @@
-22 22 * * 5 python /home/anis/tapis/django-rug/run_web_radio.py 3 3 # alertrug2
-33 13 * * 3,4 python /home/anis/tapis/django-rug/run_mp3_playback.py 3 # alertrug3
+b''
+33 13 * * 3,4 python G:\tapis\RugBack\djangorug\run_mp3_playback.py 2 # alertrug3
