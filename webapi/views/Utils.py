@@ -16,7 +16,7 @@ def add_job_in_crontab(alarm):
     run_script_path = get_root_path(current_script_path) + os.sep + "run_mp3_playback.py"
 
     # new_job: <minute> <hour> * * <day_of_week> <run_script_path> <mp3playback_id>
-    new_job = "%s %s * * %s python %s %s " % (alarm.minute,
+    new_job = "%s %s * * %s python3.5 %s %s " % (alarm.minute,
                                               alarm.hour,
                                               day_of_week,
                                               run_script_path,
@@ -26,7 +26,7 @@ def add_job_in_crontab(alarm):
         new_job += "%s " % alarm.auto_stop_seconds
 
     # new_job: <minute> <hour> * * <day_of_week> <run_script_path> <alarm_id> [<auto_stop_minute>] # alertrug<alarm_id>
-    new_job += "# alertrug%s" % alarm.id
+    new_job += " > /tmp/cron.tmp 2> /tmp/cron2.tmp # alertrug%s" % alarm.id
 
     if not alarm.is_active:
         line = "# "

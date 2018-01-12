@@ -8,7 +8,6 @@ E.g: python run_mp3_playback.py 12 20
 import inspect
 import os
 import sys
-import requests
 import django
 from webapi.Utils.PlayerManager import CallbackPlayer, ThreadTimeout, PlayerManager
 

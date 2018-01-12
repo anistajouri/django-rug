@@ -25,7 +25,7 @@ class AlarmClock(models.Model):
     is_active = models.BooleanField(default=False)
     auto_stop_seconds = models.IntegerField(default=0)
     stop_seconds_hit_rug = models.IntegerField(default=0)
-    mp3_playback = models.ForeignKey(MP3Playback)
+    mp3_playback = models.ForeignKey(MP3Playback,on_delete=models.CASCADE)
 
 
 class AlertRug(models.Model):
@@ -35,7 +35,7 @@ class AlertRug(models.Model):
     alert_duration_Seconds = models.IntegerField()
     auto_stop_seconds = models.IntegerField(default=0)
     stop_seconds_hit_rug = models.IntegerField(default=0)
-    mp3_playback = models.ForeignKey(MP3Playback)
+    mp3_playback = models.ForeignKey(MP3Playback,on_delete=models.CASCADE)
 
 
 

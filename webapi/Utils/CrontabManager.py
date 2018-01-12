@@ -27,7 +27,8 @@ class CrontabManager(object):
         # get current crontab
         p = subprocess.Popen("crontab -l", stdout=subprocess.PIPE, shell=True)
         (output, err) = p.communicate()
-        mycron = str(output)
+        print('output:', output.decode("utf-8"))
+        mycron = str(output.decode("utf-8"))
         mycron = mycron.splitlines()
         logger.debug("Current crontab line: %s" % str(mycron))
         return mycron
@@ -153,6 +154,7 @@ class CrontabManager(object):
         """
         f = open(cls.TMP_FILE, "w")
         for job_line in new_crontab:
+            print("job_line:", job_line)
             f.write(job_line)
             f.write('\n')
         f.close()
