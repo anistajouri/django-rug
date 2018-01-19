@@ -1,2 +1,2 @@
 b''
-33 13 * * 3,4 python G:\tapis\RugBack\djangorug\run_mp3_playback.py 2 # alertrug3
+33 13 * * 3,4 python G:\tapis\RugBack\djangorug\run_mp3_playback.py 2 8 # alertrug3
