@@ -32,16 +32,12 @@ class AlertRug(models.Model):
     is_active_first_pass = models.BooleanField(default=False)
     is_active_second_pass = models.BooleanField(default=False)
     is_playback_active = models.BooleanField(default=False)
-    alert_duration_Seconds = models.IntegerField()
-    auto_stop_seconds = models.IntegerField(default=0)
     stop_seconds_hit_rug = models.IntegerField(default=0)
     mp3_playback = models.ForeignKey(MP3Playback,on_delete=models.CASCADE)
 
-
-
 class AlertNotified(models.Model):
     date_pressed = models.CharField(max_length=250)
-    duration_Seconds = models.IntegerField()
+    duration_Seconds = models.FloatField()
 
 
 class BackupMusic(models.Model):

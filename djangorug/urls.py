@@ -23,6 +23,7 @@ from webapi.views import SoundView
 from webapi.views import MP3PlaybackView
 from webapi.views import AlarmClockView
 from webapi.views import SystemDateView
+from webapi.views import AlertView
 
 router = routers.DefaultRouter()
 
@@ -41,6 +42,9 @@ urlpatterns = [
 
     url(r'^systemdate/?$', SystemDateView.SystemDateList.as_view()),
     url(r'^player/?$', PlayerView.PlayerStatus.as_view()),
+
+    url(r'^alertrug/(?P<pk>[0-9]+)/?$', AlertView.AlertRugConfig.as_view()),
+
 
     url(r'^backup/?$', BackupFileView.BackupFileView.as_view()),
 
