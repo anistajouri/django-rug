@@ -20,12 +20,11 @@ class AlertRugResource(resources.ModelResource):
         model = AlertRug
 
 class AlertRugAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-
     resource_class = AlertRugResource
 
-    list_display = ( 'id', 'is_active_first_pass', 'is_active_second_pass', 'is_playback_active', 
+    list_display = ( 'id', 'is_light_active', 'is_audio_active', 'is_camera_active', 'is_message_active', 
     'stop_seconds_hit_rug', 'mp3_playback' )
-    search_fields = [ 'id', 'is_active_first_pass', 'is_active_second_pass', 'is_playback_active', 
+    search_fields = [ 'id', 'is_light_active', 'is_audio_active', 'is_camera_active', 'is_message_active', 
     'stop_seconds_hit_rug', 'mp3_playback' ]
 
 
