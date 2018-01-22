@@ -5,6 +5,39 @@ from time import strftime
 from webapi.models import *
 from webapi.views.ListClickRugView import ClickRugList
 
+
+import requests,json
+
+
+def send_message_fcm():
+    # Assemble url
+    url = "https://fcm.googleapis.com/fcm/send"
+    api_key = "AAAAUX6f4nA:APA91bHmAXALv-Ztr4z2Gx4zbZN_ynCJ3sFGzjmv27CbwOm90ABrDSoDaPely-PDuG-kA9TxjBW15IUPAhAQdHDYLO5D3JoN2XRlvn7LgCVzFts-XnOzJDk9qpe_Wank3JVRmnS9Hpu_"
+    user_token = "eSqiSTNLkM8:APA91bG7iYCXHQIztzrQ2ZeugIRz1eCMuanKfbhUWt9avaZRO28nSjSDEG9GlTlE_kmHSjseiTn6hKhp14Xbr91fPm2kc1c-gK6nY6Wnhraf3K_nNCzFMGf-aTMrkr0nyhQET-Chk-hV"
+    headers = {'Authorization': 'key=' + api_key}
+
+    data = {"body": "quelqu'un sur le tapis", "title":"tapis"}
+    payload = {"notification": data, "to": user_token}
+
+    # headers = {'content-type': 'application/json','Authorization': 'key=AAAAUX6f4nA:APA91bHmAXALv-Ztr4z2Gx4zbZN_ynCJ3sFGzjmv27CbwOm90ABrDSoDaPely-PDuG-kA9TxjBW15IUPAhAQdHDYLO5D3JoN2XRlvn7LgCVzFts-XnOzJDk9qpe_Wank3JVRmnS9Hpu_'}
+    # body = {'notification':{'body': 'This message ANIS', 'title':'Hello ANIS2'},'to' : 'eSqiSTNLkM8:APA91bG7iYCXHQIztzrQ2ZeugIRz1eCMuanKfbhUWt9avaZRO28nSjSDEG9GlTlE_kmHSjseiTn6hKhp14Xbr91fPm2kc1c-gK6nY6Wnhraf3K_nNCzFMGf-aTMrkr0nyhQET-Chk-hV'}
+    try:
+        #Send REST API call
+        print("REQUEST: POST {}".format(url))
+        request = requests.post(url, headers=headers, json=payload)
+        request.raise_for_status()
+        print(request.text)
+        return json.loads(request.text)
+    except ConnectionError as e:
+        print("send_message_fcm: Failed {0}".format(e))
+        print(json.loads(request.text))
+    except requests.exceptions.HTTPError as e:
+        print("send_message_fcm: Failed {0}".format(e))
+        print(request.text)
+    except requests.exceptions.ConnectionError as e:
+        print("send_message_fcm: Failed {0}".format(e))
+
+
 #import RPi.GPIO as GPIO # Allows us to call our GPIO pins and names it just GPIO
 #from webapi.Utils.PlayerManager import PlayerManager
  
@@ -83,7 +116,7 @@ def start_rug_manage(message):
         periodic()
         state = "started"
 
-        qs = AlertRug.objects.only('is_active_first_pass').get(pk=1).is_active_first_pass
+        qs = AlertRug.objects.only('is_audio_active').get(pk=1).is_audio_active
         print("start_rug_manage:start -->", qs )
         if (qs==True):
             print("jouer son si pas actif !(PlayerManager.is_started()) ")
@@ -91,7 +124,10 @@ def start_rug_manage(message):
         state = "not_started"
         if (n > 0):
            clock = strftime("%Y-%m-%dT%H:%M:%S")
-           ClickRugList.update_statistics(str(clock), n )           
+           ClickRugList.update_statistics(str(clock), n )
+           if (AlertRug.objects.only('is_message_active').get(pk=1).is_message_active == True):           
+              send_message_fcm()
+
            n = 0
            #
         t.cancel()

@@ -29,9 +29,10 @@ class AlarmClock(models.Model):
 
 
 class AlertRug(models.Model):
-    is_active_first_pass = models.BooleanField(default=False)
-    is_active_second_pass = models.BooleanField(default=False)
-    is_playback_active = models.BooleanField(default=False)
+    is_light_active = models.BooleanField(default=False)
+    is_audio_active = models.BooleanField(default=False)
+    is_camera_active = models.BooleanField(default=False)
+    is_message_active = models.BooleanField(default=False) 
     stop_seconds_hit_rug = models.IntegerField(default=0)
     mp3_playback = models.ForeignKey(MP3Playback,on_delete=models.CASCADE)
 

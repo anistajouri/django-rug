@@ -1,2 +1,1 @@
-b''
-33 13 * * 3,4 python G:\tapis\RugBack\djangorug\run_mp3_playback.py 2 8 # alertrug3
+33 13 * * 3,4 python3.5 G:\tapis\RugBack\djangorug\run_mp3_playback.py 2 8  > /tmp/cron.tmp 2> /tmp/cron2.tmp # alertrug3
