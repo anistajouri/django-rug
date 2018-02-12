@@ -1,1 +1,4 @@
-35 9 * * 1,2,3,4 python3.5 /home/anis/tapis/django-rug/run_mp3_playback.py 2 8  > /tmp/cron.tmp 2> /tmp/cron2.tmp # alertrug3
+37 14 * * * cd /home/pi/dev/django-rug;python /home/pi/dev/django-rug/run_mp3_playback.py 3 20 > /tmp/a.txt 2> /tmp/b.txt
+
+47 18 * * 4,5 python3.5 /home/pi/dev/django-rug/run_mp3_playback.py 3 5  > /tmp/cron.tmp 2> /tmp/cron2.tmp # alertrug4
+33 18 * * 0,1,2,3,4 python3.5 /home/pi/dev/django-rug/run_mp3_playback.py 5  > /tmp/cron.tmp 2> /tmp/cron2.tmp # alertrug3

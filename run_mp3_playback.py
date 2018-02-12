@@ -76,6 +76,9 @@ if backup_mp3_list is not None:
 # test the URL, if this one is not valid, we start the backup
 if is_mp3_path_valid(mp3_path=mp3_playback_to_play.mp3_path):
     print("valid mp3")
+
+    os.system("ps aux | grep -ie pixels  | awk '{print $2}' | xargs kill -9")
+    os.system("python ~/pixels/rainbow.py &")
     # start the thread that will play the mp3 playback, check that the mp3 playback is playing, and auto kill it if needed  
     mp3_playback_callback = CallbackPlayer(mp3_path=mp3_playback_to_play.mp3_path)
     # the following thread will start to play the mp3 playback and then check if the player is still alive after 35 seconds
